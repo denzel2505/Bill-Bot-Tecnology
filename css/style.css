@@ -1027,9 +1027,8 @@ body {
 }
 
 .logo {
-  background-image: url(../img/svg/Logo.svg);
-  width: 49px;
-  height: 49px;
+  background-image: url('../img/bot.png');
+  background-size: 100px;
 }
 
 .menu-toggle {
@@ -1441,7 +1440,7 @@ button.disabled:focus {
   border-radius: 4px;
   font-size: 16px;
   line-height: 1.5;
-  color: #2f49d1;
+  color: #0061f7;
 }
 
 .sidebar-toggle {
@@ -1993,7 +1992,7 @@ label {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  background-color: #0061f7 !important;
+  background-color: #0042f7 !important;
   width: 253px;
   padding: 20px 15px 37px 20px;
   -webkit-transition: 0.5s all;
@@ -2473,64 +2472,70 @@ label {
 .search-wrapper input {
   width: 271px;
   border-radius: 6px;
-  background-color: #eff0f6;
+  background-color: #acabab;
   padding: 3px 8px 3px 42px;
   height: 40px;
   border-width: 0;
 }
 
 .search-wrapper input::-webkit-input-placeholder {
-  background-color: #eff0f6;
+  background-color: #cacaca;
   font-size: 14px;
   line-height: 2.43;
-  color: #d6d7e3;
+  color: #ffffff;
   -webkit-transition: 0.3s all;
   transition: 0.3s all;
 }
 
 .search-wrapper input::-moz-placeholder {
-  background-color: #eff0f6;
+  background-color: #cacaca;
   font-size: 14px;
   line-height: 2.43;
-  color: #d6d7e3;
+  color: #ffffff;
   -moz-transition: 0.3s all;
   transition: 0.3s all;
 }
 
 .search-wrapper input:-ms-input-placeholder {
-  background-color: #eff0f6;
+  background-color: #cacaca;
   font-size: 14px;
   line-height: 2.43;
-  color: #d6d7e3;
+  color: #cacaca;
   -ms-transition: 0.3s all;
   transition: 0.3s all;
 }
 
 .search-wrapper input::-ms-input-placeholder {
-  background-color: #eff0f6;
+  background-color: #cacaca;
   font-size: 14px;
   line-height: 2.43;
-  color: #d6d7e3;
+  color: #ffffff;
   -ms-transition: 0.3s all;
   transition: 0.3s all;
 }
 
 .search-wrapper input::placeholder {
-  background-color: #eff0f6;
+  background-color: #acabab;
   font-size: 14px;
   line-height: 2.43;
-  color: #d6d7e3;
+  color: #e5e6e7;
   -webkit-transition: 0.3s all;
   -o-transition: 0.3s all;
   transition: 0.3s all;
 }
+/*BUSQUEDA DE DOCUMENTOS*/
+
+#numero_de_factura{
+  display: inline;
+}
+
 
 .lang-switcher {
   font-weight: 500;
   font-size: 16px;
   line-height: 1.1875;
   letter-spacing: 0.75px;
-  color: #767676;
+  color: #a5a4a4;
 }
 
 .lang-switcher-wrapper {
@@ -3453,6 +3458,27 @@ label {
 .darkmode .main-content {
   background-color: #161624;
 }
+.darkmode .invoice {
+  background-color: #363648;
+}
+.darkmode .bot {
+  background-color: #161624;
+}
+
+.bot{
+  background-color: #0041f7;
+  border: none;
+
+}
+
+.darkmode .info-principal a{
+  background-color: #363648;
+}
+
+.darkmode .info-principal a:hover{
+  background-color: #222235;
+}
+
 
 .darkmode .top-cat-list a {
   border-color: #37374F;
@@ -4301,4 +4327,88 @@ label {
     -ms-flex-direction: column;
     flex-direction: column;
   }
+}
+
+.info-principal{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.info-principal h2{
+  font-size: 1.6rem;
+}
+
+.info-principal a{
+  background-color: var(--azul1);
+  color: white;
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.info-principal a:hover{
+  background-color: #0d3dc2;
+}
+
+.invoice{
+  background-color: var(--azul1);
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 15px;
+}
+
+.contenido,.contenido2{
+  margin: 10px 25px;
+}
+.contenido2{
+  display: flex;
+  flex-direction: column;
+  color: white;
+  justify-content: space-evenly;
+}
+.contenido2 h2{
+  color: white;
+}
+
+.contenido2 svg:hover{
+  transition: all 200ms ease-in;
+  color: var(--blanco);
+  cursor: pointer;
+}
+
+
+
+.contenido h1{
+  color: white;
+  margin: 0 0 20px 0;
+}
+.contenido p{
+  
+  margin: 0 0 20px 0;
+}
+
+.invoice-header {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.invoice-detail {
+  margin-bottom: 5px;
+}
+
+.btn-edit svg{
+  padding: 10px;
+  margin: 30px;
+}
+
+
+:root{
+  --azul1: #0042f7;
+  --azul2: #4d82bc;
+  --azul3: #84b6f4;
+  --blanco: #95abb9;
 }

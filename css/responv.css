@@ -1,0 +1,94 @@
+@media (max-width: 1024px) {
+    html{
+        background-color: rgb(122, 116, 116);
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    body{
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .fondo{
+        background-image: url('/img/LSW-–-Your-Legal-Support-Office-1.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position-x: -160px;
+        width: 100%;
+        display: flex;
+        justify-content: start;
+        flex-wrap: wrap;
+        margin: 0;
+    }
+
+    #contenido{
+        flex-direction: column;
+        width: 100%;
+    }
+
+    #contenido p{
+        text-align: justify;
+        padding: 25px 35px;
+    }
+
+    #contenido div{
+        margin: 15px 30px;
+    }
+
+    nav ul{
+        display: none;
+        visibility: hidden;
+        width: 100%;
+    }
+
+    nav .law,.gavel{
+        visibility: hidden;
+        position: absolute;
+    }
+
+    .infoLawlink h1{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        font-size: 3.8rem;
+    }
+    .infoLawlink p{
+        margin: 10px auto 30px auto;
+        font-size: 13px;
+        flex-wrap: wrap;
+        max-width: 300px;
+        text-align: justify;
+    }
+    .infoLawlink .boton{
+        display: block;
+        width: 150px;
+        margin: 0;
+    }
+
+    .infoLawlink svg{
+        display: none;
+        
+    }
+
+
+    .equipo{
+        flex-wrap: nowrap;
+        overflow: auto;
+    }
+
+    .equipo img,.rol,.nombre{
+        margin: 20px;
+    }
+
+    .flecha{
+        visibility: hidden;
+    }
+}
+
+@media (max-width: 1010px) {
+    #contenido{
+        flex-direction: column;
+        width: 100%;
+    }
+}
