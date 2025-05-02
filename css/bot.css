@@ -30,7 +30,9 @@ html{
     padding: 25px;
     height: 100%;
     justify-content: space-between;
+    
 }
+
 
 .logo-bot{
     display: flex;
@@ -41,11 +43,6 @@ html{
     margin-left: 30px;
 }
 
-.fondo .law{
-    margin: auto auto auto 10px;
-    font-size: 2.3rem;
-    padding:0;
-}
 
 .fondo nav,ul{
     display: flex;
@@ -69,7 +66,7 @@ html{
 }
 
 
-/*Law fondo*/
+/*fondo*/
 
 .fondo{
     background: linear-gradient(var(--azul-dark),var(--azul-2));
@@ -95,9 +92,72 @@ html{
     justify-content: space-around;
 }
 
-
+/*ANIMACION*/
 .infoBill-Bot .info-2 img{
     width: 500px;
+    object-fit: fill;
+}
+
+
+
+.infoBill-Bot .info-2 .info-2-logos img{
+    width: 70px;
+    height: 70px;
+    object-fit:contain;
+   position:absolute;
+    top: 0;
+    background-color: #ffffffa4;
+    border: 3px solid var(--azul-1) ;
+    border-radius: 100%;
+    padding: 15px 5px;
+    margin-top: -300px;
+    /* Primero se establece un borde transparente */
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.5);
+}
+
+
+.infoBill-Bot .info-2-logos{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 0 15%;
+    animation: subir 2s infinite alternate ease-in-out;
+}
+
+.info-2-logos .caja2{
+    right: 0;
+    animation: subir1 1.8s infinite alternate ease-in-out;
+}
+
+.info-2-logos .caja3{
+    bottom: 0;
+    animation: subir2 1.8s infinite alternate ease-in-out;
+}
+
+@keyframes subir{
+    0%{
+        transform: translateY(0);
+    }
+    100%{
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes subir1 {
+    0%{
+        transform: translateY(0);
+    }
+    100%{
+        transform: translateY(-18px);
+    }
+}
+
+@keyframes subir2 {
+    0%{
+        transform: translateY(0);
+    }
+    100%{
+        transform: translateY(-19px);
+    }
 }
 
 .infoBill-Bot h1{
@@ -147,8 +207,8 @@ html{
 /*Flecha*/
 .flecha{
     position: fixed;
-    right: 20px;
-    bottom: 40px;
+    right: 12px;
+    bottom: 60px;
 }
 
 /*Contenido*/
@@ -265,7 +325,14 @@ h4{
     transition: box-shadow 0.3s ease-in-out;
     margin: 0 30px;
     max-width: 305px;
+    display: flex;
+    flex-direction: column;
 }
+
+.plan p{
+    margin-bottom: 12px;
+}
+
 .plan:hover {
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
 }
@@ -282,15 +349,16 @@ h4{
     margin: 10px 0;
 }
 .btn {
-    display: inline-block;
-    margin-top: 10px;
     padding: 10px 15px;
     background: #0042f7;
     color: white;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
+    display: inline-block;
+    margin-top: auto;
 }
+
 .btn:hover {
     background: #0031b5;
 }

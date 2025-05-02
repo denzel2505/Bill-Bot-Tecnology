@@ -1,7 +1,3 @@
-<?php echo "<link rel='stylesheet' href='css/estilos.css'>"; ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,14 +8,18 @@
   <title>Ingreso</title>
   <link rel="stylesheet" href="./css/registro.css">
   <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="./img/bot2.ico" type="image/x-icon">
 
 
   <style>
-    .imagen{
-        background-image: url("./img/bot.jpeg");
-        border-radius: 1rem 0 0 1rem;
-        background-position: center;
-    }
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      text-decoration:none;
+      list-style: none
+    }    
   </style>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -30,11 +30,21 @@
   <!-- Google Fonts Roboto -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
   <!-- MDB -->
-  <link rel="stylesheet" href="css/bootstrap-login-form.min.css" />
+  <link rel="stylesheet" href="./css/bootstrap-login-form.min.css" />
 </head>
 
 <body>
   <!-- Start your project here-->
+  
+  <a href="./index.html" class="back-home d-flex position-absolute align-items-center" style="margin: 30px;" >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" width="44" height="44" stroke-width="2">
+    <path d="M5 12l14 0"></path>
+    <path d="M5 12l4 4"></path>
+    <path d="M5 12l4 -4"></path>
+  </svg>
+  <h1 style="font-size: 1.5rem; color: #fff;" >Regresar</h1>
+  </a>
+
   <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-xl-8">
@@ -50,7 +60,7 @@
               <div class="col-md-6 col-lg-7 d-flex align-items-center">
                 <div class="card-body p-5 p-lg-6 text-black">
   
-                  <form action="validar.php" method="post">
+                  <form action="./validar.php" method="post">
   
                     <div class="d-flex align-items-center mb-3 pb-1">
                       <!-- <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i> -->
@@ -73,11 +83,11 @@
                       <button class="btn form-control btn-dark btn-lg btn-block"  type="submit">Login</button>
                     </div>
   
-                    <center><a class="small text-muted" href="#!">Olvidaste tu contraseña?</a>
+                    <center><a class="small text-muted" href="./recuperar-contraseña.php">Olvidaste tu contraseña?</a>
                     <p class="mb-5 pb-lg-2" style="color: #393f81;">No tienes cuenta? <a href="registro.php" style="color: #393f81;">Registrate aquí</a></p>
-                    <a href="#!" class="small text-muted">Terms of use.</a>
-                    <a href="#!" class="small text-muted">Privacy policy</a>
-                    <a href="#!" class="small text-muted">Bill Bot</a></center>
+                    <a href="#!" class="small text-muted">Terminos de uso.</a>
+                    <a href="#!" class="small text-muted">Politica privada</a>
+                    <a href="#!" class="small text-muted">Bill Bot Technology</a></center>
                   </form>
   
                 </div>
@@ -96,23 +106,51 @@
   <script type="text/javascript"></script>
 
   <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script type="text/javascript">
+  (function(d, t) {
+      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      v.onload = function() {
+        window.voiceflow.chat.load({
+          verify: { projectID: '67bbb0c7c97c50a0c1d20a51' },
+          url: 'https://general-runtime.voiceflow.com',
+          versionID: 'production', 
+          voice: { 
+            url: "https://runtime-api.voiceflow.com" 
+          }
+        });
+      }
+      v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+  })(document, 'script');
+</script>
 </body>
 
 </html>
 
 <style>
   body{
+    height: 100vh;         /* Usa toda la altura visible */
+    width: 100vw; 
     background-image: url('./img/fondos/fondo.avif');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover;  /* Evita distorsión, pero puede dejar espacios vacíos */
+    background-position: center;
+    image-rendering: crisp-edges;      /* Mejora bordes en algunas imágenes */
+    image-rendering: -webkit-optimize-contrast; /* Mejora en WebKit (Chrome, Safari) */
   }
 
+  @media (max-width: 768px) {
+    body {
+      background-image: url('mobile.webp'); /* Versión optimizada para móviles */
+    }
+  }
   .imagen{
     background-image: url("./img/bot.jpg");
-    border-radius: 1rem 3rem 3rem 1rem;
+    border-radius: 1rem 0 0 1rem;
     background-color: #0042f7;
     background-position: center center;
     background-repeat: no-repeat;
+    
 }
 
   .btn{

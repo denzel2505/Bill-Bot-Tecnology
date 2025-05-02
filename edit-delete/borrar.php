@@ -1,5 +1,5 @@
 <?php
-    include("../conexion-BillBot.php");
+    include("../conexion/conexion-BillBot.php");
 
     $id = $_GET['id'];
 

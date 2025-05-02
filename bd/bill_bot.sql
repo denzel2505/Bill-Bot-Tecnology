@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-12-2024 a las 23:19:57
+-- Tiempo de generación: 17-03-2025 a las 05:40:38
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -33,6 +33,7 @@ CREATE TABLE `usuarios` (
   `usuario` varchar(200) NOT NULL,
   `correo` varchar(100) NOT NULL,
   `contraseña` varchar(20) NOT NULL,
+  `url` varchar(500) NOT NULL,
   `sesion_activa` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
@@ -40,8 +41,8 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `usuario`, `correo`, `contraseña`, `sesion_activa`) VALUES
-(8, 'Denzel Montes', 'denzo25', 'montes@gmail.com', '0012', 1);
+INSERT INTO `usuarios` (`id`, `nombre`, `usuario`, `correo`, `contraseña`, `url`, `sesion_activa`) VALUES
+(8, 'Denzel Montes', 'denzo25', 'montes@gmail.com', '0012', '../img/perfil/avatar-face-03.png', 1);
 
 -- --------------------------------------------------------
 
@@ -54,18 +55,9 @@ CREATE TABLE `usuarios2` (
   `nombre` varchar(50) NOT NULL,
   `usuario` varchar(50) NOT NULL,
   `correo` varchar(50) NOT NULL,
-  `contraseña` varchar(70) NOT NULL
+  `contraseña` varchar(70) NOT NULL,
+  `rol` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
---
--- Volcado de datos para la tabla `usuarios2`
---
-
-INSERT INTO `usuarios2` (`id`, `nombre`, `usuario`, `correo`, `contraseña`) VALUES
-(4, 'Denzel Rafael ', 'denzo25', 'montesdenzel25@gmail.com', '0101'),
-(5, 'Jeremias', 'jere16', 'jere14@gmail.com', '1212'),
-(6, 'Miguel Ramirez', 'Migue2309', 'migue@gmail.com', '5522'),
-(7, 'Jimena Alida', 'Jimm288', 'jim23@gmail.com', '6589');
 
 --
 -- Índices para tablas volcadas
@@ -91,13 +83,13 @@ ALTER TABLE `usuarios2`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios2`
 --
 ALTER TABLE `usuarios2`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

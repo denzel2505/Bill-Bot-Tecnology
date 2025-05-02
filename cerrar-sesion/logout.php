@@ -1,9 +1,9 @@
 <?php
 session_start();
-require '../conexion-BillBot.php';
+require '../conexion/conexion-BillBot.php';
 
 if (isset($_SESSION['correo'])) {
-    $usuario = $_SESSION['correo'];
+    $correo = $_SESSION['correo'];
 
     // Actualizar la base de datos para marcar sesión como inactiva
     $query = "UPDATE usuarios SET sesion_activa = 0 WHERE correo = ?";

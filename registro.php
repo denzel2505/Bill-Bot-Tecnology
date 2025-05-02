@@ -8,7 +8,8 @@
   <title>Registro</title>
   <link rel="stylesheet" href="./css/registro.css" rel="preload">
   <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
-
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="./img/bot2.ico" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <!-- MDB icon -->
   <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
@@ -21,6 +22,16 @@
 </head>
 
 <body>
+
+<a href="./ingreso.php" class="back-home d-flex position-absolute align-items-center" style="margin: 30px;" >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" width="44" height="44" stroke-width="2">
+    <path d="M5 12l14 0"></path>
+    <path d="M5 12l4 4"></path>
+    <path d="M5 12l4 -4"></path>
+  </svg>
+  <h1 style="font-size: 1.5rem; color: #fff;" >Regresar</h1>
+  </a>
+
   <!-- Start your project here-->
   <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -37,7 +48,7 @@
               <div class="col-md-6 col-lg-7 d-flex align-items-center">
                 <div class="card-body p-5 p-lg-6 text-black">
   
-                  <form action="enviar-datos-registro.php" method="post">
+                  <form action="./php/enviar-datos-registro.php" method="post">
   
                     <div class="d-flex align-items-center mb-3 pb-1">
                       <!-- <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i> -->
@@ -70,11 +81,14 @@
                     <div class="pt-1 mb-4">
                       <button class="btn form-control btn-dark btn-lg btn-block" type="submit">Registrar</button>
                     </div>
-    
-                    <div class="politica">
-                    <p href="#!" class="small text-muted">Ya tienes cuenta?</p>
-                    <a href="./ingreso.php" class="small text-muted">Inicia sesion aquí</a>
-                    </div>
+
+                    <center>
+
+                      <div class="politica">
+                        <p href="#!" class="small text-muted">Ya tienes cuenta?</p>
+                        <a href="./ingreso.php" class="small text-muted">Inicia sesion aquí</a>
+                      </div>
+                    </center>
                   </form>
   
                 </div>
@@ -93,11 +107,35 @@
   <script type="text/javascript"></script>
 
   <script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script type="text/javascript">
+  (function(d, t) {
+      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      v.onload = function() {
+        window.voiceflow.chat.load({
+          verify: { projectID: '67bbb0c7c97c50a0c1d20a51' },
+          url: 'https://general-runtime.voiceflow.com',
+          versionID: 'production', 
+          voice: { 
+            url: "https://runtime-api.voiceflow.com" 
+          }
+        });
+      }
+      v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+  })(document, 'script');
+</script>
 </body>
 
 </html>
 
 <style>
+
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
   body{
     background-image: url('./img/fondos/fondo.avif');
     background-repeat: no-repeat;
@@ -106,8 +144,7 @@
 
   .imagen{
     background-image: url("./img/bot.jpg");
-    border-radius: 1rem 3rem 3rem 1rem;
-    
+    border-radius: 1rem 0 0 1rem;
     background-color: #0042f7;
     background-position: center center;
     background-repeat: no-repeat;

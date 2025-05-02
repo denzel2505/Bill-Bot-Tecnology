@@ -3,6 +3,9 @@ $con = mysqli_connect("localhost","root","","bill_bot");
 $sql = "SELECT * FROM usuarios2";
 $query = mysqli_query($con, $sql);
 
+$sql2 = "SELECT * FROM usuarios";
+$query2 = mysqli_query($con, $sql2);
+
 session_start();
 if (!isset($_SESSION['correo'])) {
   header("Location: ../ingreso.php");
@@ -42,9 +45,9 @@ header("Expires: 0");
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elegant Dashboard | Dashboard</title>
+  <title>Gestion de perfil | Bill Bot</title>
   <!-- Favicon -->
-  <link rel="shortcut icon" href="../img/svg/logo.svg" type="image/x-icon">
+  <link rel="shortcut icon" href="../img/bot2.ico" type="image/x-icon">
   <!-- Custom styles -->
   <link rel="stylesheet" href="../css/style.min.css">
   <link rel="stylesheet" href="../css/style.css">
@@ -77,7 +80,7 @@ header("Expires: 0");
         <div class="sidebar-body">
             <ul class="sidebar-body-menu">
                 <li>
-                    <a href="../home.php"><span class="icon home" aria-hidden="true"></span>Dashboard</a>
+                    <a href="../dashboard/home.php"><span class="icon home" aria-hidden="true"></span>Dashboard</a>
                 </li>
                 <li>
                     <a class="show-cat-btn" href="##">
@@ -89,10 +92,10 @@ header("Expires: 0");
                     </a>
                     <ul class="cat-sub-menu">
                         <li>
-                            <a href="../armador1.php">Armado masivo</a>
+                            <a href="../dashboard/armador1.php">Armado masivo</a>
                         </li>
                         <li>
-                            <a href="../armador2.php">Armado de cuentas</a>
+                            <a href="../dashboard/armador2.php">Armado de cuentas</a>
                         </li>
                     </ul>
                 </li>
@@ -129,7 +132,7 @@ header("Expires: 0");
         </div>
     </div>
     <div class="sidebar-footer">
-        <a href="##" class="sidebar-user">
+        <a href="mailto:montesdenzel25@gmail.com?subject=Solicitud%20de%20Soporte%20Tecnico" target='_blank' class="sidebar-user">
             <span class="sidebar-user-img">
                 <picture class="bot"><source srcset="../img/bot.png" type="image/webp"><img src="./img/avatar/avatar-illustrated-01.png" alt="User name"></picture>
             </span>
@@ -217,24 +220,23 @@ header("Expires: 0");
         </ul>
       </div>
       <div class="nav-user-wrapper">
-        <button href="##" class="nav-user-btn dropdown-btn" title="My profile" type="button">
-          <span class="sr-only">My profile</span>
+        <button href="##" class="nav-user-btn dropdown-btn" title="Mi Perfil" type="button">
+          <span class="sr-only">Mi Perfil</span>
           <span class="nav-user-img">
-            <picture><source srcset="../img/avatar/avatar-illustrated-02.webp" type="image/webp"><img src="./img/avatar/avatar-illustrated-02.png" alt="User name"></picture>
+            <picture><?php while ($row = mysqli_fetch_array($query2)): ?>
+            <img width="300px" src="<?=$row['url']?>" type="image/*">
+          <?php endwhile; ?></picture>
           </span>
         </button>
         <ul class="users-item-dropdown nav-user-dropdown dropdown">
           <li><a href="../perfiles/myPerfil.php">
               <i data-feather="user" aria-hidden="true"></i>
-              <span>Profile</span>
+              <span>Perfil</span>
             </a></li>
-          <li><a href="##">
-              <i data-feather="settings" aria-hidden="true"></i>
-              <span>Account settings</span>
-            </a></li>
+          
           <li><a class="danger" href="../cerrar-sesion/logout.php">
               <i data-feather="log-out" aria-hidden="true"></i>
-              <span>Log out</span>
+              <span>Cerrar Sesion</span>
             </a></li>
         </ul>
       </div>
@@ -306,6 +308,24 @@ header("Expires: 0");
 <script src="../plugins/feather.min.js"></script>
 <!-- Custom scripts -->
 <script src="../js/script.js"></script>
+
+<script type="text/javascript">
+  (function(d, t) {
+      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      v.onload = function() {
+        window.voiceflow.chat.load({
+          verify: { projectID: '67bbb0c7c97c50a0c1d20a51' },
+          url: 'https://general-runtime.voiceflow.com',
+          versionID: 'production', 
+          voice: { 
+            url: "https://runtime-api.voiceflow.com" 
+          }
+        });
+      }
+      v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+  })(document, 'script');
+</script>
+
 </body>
 </html>
 

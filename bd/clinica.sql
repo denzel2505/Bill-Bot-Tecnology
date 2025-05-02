@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-12-2024 a las 23:20:32
+-- Tiempo de generación: 17-03-2025 a las 03:25:48
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -43,8 +43,11 @@ CREATE TABLE `facturas` (
 --
 
 INSERT INTO `facturas` (`numero_de_factura`, `fecha`, `fecha de vencimiento`, `dias de vencimiento`, `descripcion`, `EPS`, `servicio`, `valor`) VALUES
-('FA253404', '2024-12-04', '2024-12-08', 4, 'FACTURA ATENCION', 'COOSALUD EPS', 'URGENCIAS', 200.99),
-('FA33333', '2024-12-13', '2024-12-24', 5, 'FACTURA ATENCION 2', 'CPOSDA', 'SAÑUD', 300.123);
+('FA12542', '2025-01-15', '2025-01-13', 3, 'FACTURA ATENCION 5', 'CAJACOPI', 'GENERAL', 50.687),
+('FA253404', '2024-12-04', '2024-12-08', 4, 'FACTURA ATENCION 1', 'COOSALUD', 'URGENCIAS', 200.995),
+('FA33333', '2024-12-13', '2024-12-24', 5, 'FACTURA ATENCION 2', 'MUTUALSER', 'CIRUGIA', 300.123),
+('FA50062', '2024-12-04', '2024-12-07', 4, 'FACTURA ATENCION 3', 'SALUD TOTAL', 'ODONTOLOGIA', 12000),
+('FA77688', '2025-01-01', '2025-01-02', 7, 'FACTURA ATENCION 4', 'NUEVA EPS', 'URGENCIAS', 860.532);
 
 --
 -- Índices para tablas volcadas

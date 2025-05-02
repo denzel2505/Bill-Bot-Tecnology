@@ -1,6 +1,6 @@
 <?php
 
-include("../conexion-BillBot.php");
+include("../conexion/conexion-BillBot.php");
 
 $id=$_POST["id"];
 $rol = $_POST['rol'];
