@@ -23,10 +23,10 @@
     }
     $imagen_path = $target_file;
 
-    //$sql = "INSERT INTO usuarios (url) VALUES (?)";
-    $query = "UPDATE usuarios SET url = (?)";
+    //$sql = "INSERT INTO administrador (url) VALUES (?)";
+    $query = "UPDATE administrador SET url = (?)";
     
-    /*$sql = "UPDATE usuarios SET nombre = '$nombre', apellido = '$apellido', usuario = '$usuario', correo = '$correo'";
+    /*$sql = "UPDATE administrador SET nombre = '$nombre', apellido = '$apellido', usuario = '$usuario', correo = '$correo'";
 
     $consulta = mysqli_query($con, $sql);*/
 

@@ -8,7 +8,7 @@
     $contraseña = $_POST['contraseña'];
     $rol = 'Facturador';
 
-    $sql = "INSERT INTO usuarios2 values('$id','$nombre','$usuario','$correo','$contraseña','$rol')";
+    $sql = "INSERT INTO facturadores (nombre, usuario, correo, contraseña, rol) VALUES ('$nombre', '$usuario', '$correo', '$contraseña', '$rol')";
 
     $consulta = mysqli_query($con,$sql);
 

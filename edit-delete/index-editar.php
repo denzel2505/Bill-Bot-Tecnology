@@ -3,7 +3,7 @@
 
     $id=$_GET['id'];
 
-    $sql = "SELECT * FROM usuarios2 where id='$id'";
+    $sql = "SELECT * FROM facturadores where id='$id'";
 
     $consulta = mysqli_query($con,$sql);
 

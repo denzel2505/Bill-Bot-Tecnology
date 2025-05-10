@@ -10,7 +10,7 @@ if (!isset($_SESSION['correo'])) {
 $correo = $_SESSION['correo'];
 
 // Verificar si la sesión está activa en la base de datos
-$query = "SELECT sesion_activa FROM usuarios WHERE correo = ?";
+$query = "SELECT sesion_activa FROM administrador WHERE correo = ?";
 $stmt = $con->prepare($query);
 $stmt->bind_param("s", $correo);
 $stmt->execute();

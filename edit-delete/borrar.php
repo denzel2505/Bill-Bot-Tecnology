@@ -3,7 +3,7 @@
 
     $id = $_GET['id'];
 
-    $sql = "DELETE FROM usuarios2 WHERE id='$id'";
+    $sql = "DELETE FROM facturadores WHERE id='$id'";
 
     $consulta = mysqli_query($con,$sql);
 
