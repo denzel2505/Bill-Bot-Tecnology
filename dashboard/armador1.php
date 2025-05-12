@@ -2,20 +2,20 @@
 session_start();
 require '../conexion/conexion-BillBot.php'; // Conexión a la base de datos
 
-$sql = "SELECT * FROM usuarios";
+$sql = "SELECT * FROM administrador";
 $query2 = mysqli_query($con, $sql);
+
 
 
 if (!isset($_SESSION['correo'])) {
     header("Location: ../ingreso.php");
     exit;
 }
-
-
 $correo = $_SESSION['correo'];
 
+
 // Verificar si la sesión está activa en la base de datos
-$query = "SELECT sesion_activa FROM usuarios WHERE correo = ?";
+$query = "SELECT sesion_activa FROM administrador WHERE correo = ?";
 $stmt = $con->prepare($query);
 $stmt->bind_param("s", $correo);
 $stmt->execute();
@@ -55,15 +55,10 @@ header("Expires: 0");
 <a class="skip-link sr-only" href="#skip-target">Skip to content</a>
 <div class="page-flex">
   <!-- ! Sidebar -->
-  <!-- ! Sidebar -->
-  <?php
-      include("./sidebar/sidebar.php");
-  ?>
+  <?php include './sidebar/sidebar.php';?> <!-- Include the sidebar navigation -->
   <div class="main-wrapper">
     <!-- ! Main nav -->
-    <?php
-      include("../dashboard/navbar/navbar.php");
-    ?>
+    <?php include './navbar/navbar.php';?> <!-- Include the top navigation bar -->
     <!-- ! Main -->
     <main class="main users chart-page" id="skip-target">
       <div class="container">

@@ -3,16 +3,21 @@ session_start();
 require '../conexion/conexion-BillBot.php'; // Conexión a la base de datos
 
 /*QUERY PARA FOTO DE PERFIL */
-$sql = "SELECT * FROM usuarios";
+$sql = "SELECT * FROM administrador";
 $query2 = mysqli_query($con, $sql);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-  $numero_factura = $_POST["numero_de_factura"] ?? null;
-  $fecha = $_POST["fecha"] ?? null;
-  $descripcion = $_POST["descripcion"] ?? null;
-  $eps = $_POST["EPS"] ?? null;
-  $servicio = $_POST["servicio"] ?? null;
-  $valor = $_POST["valor"] ?? null;
+  $numero_factura = $_POST["numero_factura"] ?? null;
+  $fecha_emision = $_POST["fecha_emision"] ?? null;
+  $servicios = $_POST["servicios"] ?? null;
+  $nombre_eps = $_POST["nombre_eps"] ?? null;
+  $estado = $_POST["estado"] ?? null;
+  $total_formato = $_POST["total_formato"] ?? null;
+  //otros datos
+  $nombre_paciente = $_POST["nombre_paciente"] ?? null;
+  $documento_identidad = $_POST["documento_identidad"] ?? null;
+  $sexo = $_POST["sexo"] ?? null;
+  $edad = $_POST["edad"] ?? null;
 
   error_reporting(E_ALL & ~E_NOTICE);  
 }
@@ -25,7 +30,7 @@ if (!isset($_SESSION['correo'])) {
 $correo = $_SESSION['correo'];
 
 // Verificar si la sesión está activa en la base de datos
-$query = "SELECT sesion_activa FROM usuarios WHERE correo = ?";
+$query = "SELECT sesion_activa FROM administrador WHERE correo = ?";
 $stmt = $con->prepare($query);
 $stmt->bind_param("s", $correo);
 $stmt->execute();
@@ -68,14 +73,10 @@ header("Expires: 0");
 <a class="skip-link sr-only" href="#skip-target">Skip to content</a>
 <div class="page-flex">
   <!-- ! Sidebar -->
-  <?php
-      include("./sidebar/sidebar.php");
-  ?>
+  <?php include './sidebar/sidebar.php';?> <!-- Include the sidebar navigation -->
   <div class="main-wrapper">
     <!-- ! Main nav -->
-    <?php
-      include("../dashboard/navbar/navbar.php");
-    ?>
+    <?php include './navbar/navbar.php';?> <!-- Include the top navigation bar -->
     <!-- ! Main -->
     <main class="main users chart-page" id="skip-target">
       <div class="container">
@@ -88,34 +89,125 @@ header("Expires: 0");
 
 
         <div class="invoice bg-gradient">
-          <?php if (isset($numero_factura) && $numero_factura): ?>
+          <?php if (isset($numero_factura) && $numero_factura): 
+                    $query = "
+        SELECT * FROM vista_factura_completa 
+        WHERE numero_factura = '" . mysqli_real_escape_string($con, $numero_factura) . "'
+    ";
+    $result = mysqli_query($con, $query);
+    $factura_data = mysqli_fetch_assoc($result);
+
+    if ($factura_data) {
+        // Estructurar todos los datos en un array
+        $historial = [
+            'id_factura' => $factura_data['id_factura'],
+            'numero_factura' => $factura_data['numero_factura'],
+            'fecha_emision' => $factura_data['fecha_emision'],
+            'fecha_emision_format' => $factura_data['fecha_emision_format'],
+            'total' => $factura_data['total'],
+            'total_formato' => $factura_data['total_formato'],
+            'estado' => $factura_data['estado'],
+            'paciente' => [
+                'id_paciente' => $factura_data['id_paciente'],
+                'nombre_completo' => $factura_data['nombre_paciente'],
+                'documento_identidad' => $factura_data['documento_identidad'],
+                'sexo' => $factura_data['sexo'],
+                'edad' => $factura_data['edad']
+            ],
+            'eps' => [
+                'nombre_eps' => $factura_data['nombre_eps']
+            ],
+            'servicios' => explode('; ', $factura_data['servicios']), // Convertir a array
+            'items_detalle' => $factura_data['items_detalle'],
+            //'medicamentos' => explode('; ', $factura_data['medicamentos']), // Convertir a array
+            'totales' => [
+                'total_servicios' => $factura_data['total_servicios'],
+                'total_items' => $factura_data['total_items']
+            ],
+            'fecha_registro' => date('Y-m-d H:i:s')
+        ];
+
+        // Guardar en JSON (historial)
+        $archivo = './historial-cuentas/historial_facturas.json';
+        $datos_existentes = [];
+
+        if (file_exists($archivo)) {
+            $datos_existentes = json_decode(file_get_contents($archivo), true);
+        }
+
+        // Evitar duplicados (actualizar si existe)
+        $encontrado = false;
+        foreach ($datos_existentes as &$item) {
+            if ($item['numero_factura'] === $historial['numero_factura']) {
+                $item = $historial; // Actualizar
+                $encontrado = true;
+                break;
+            }
+        }
+
+        if (!$encontrado) {
+            $datos_existentes[] = $historial;
+        }
+
+        file_put_contents(
+            $archivo, 
+            json_encode($datos_existentes, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
+        );
+
+        // Opcional: Devolver el JSON como respuesta (para AJAX)
+     
+    } else {
+        echo json_encode(['error' => 'Factura no encontrada']);
+    }
+
+            ?>
+
           <div class="contenido1">
               <p>Número de Factura: <?= htmlspecialchars($numero_factura) ?></p>
-              <p>Fecha: <?= htmlspecialchars($fecha) ?></p>
-              <p>Descripción: <?= htmlspecialchars($descripcion) ?></p>
-              <p>EPS: <?= htmlspecialchars($eps) ?></p>
+              <p>Fecha: <?= htmlspecialchars($fecha_emision) ?></p>
+              <p>Descripción: <?= htmlspecialchars($servicios) ?></p>
+              <p>EPS: <?= htmlspecialchars($nombre_eps) ?></p>
+              <p>Nombre Paciente: <?= htmlspecialchars($nombre_paciente) ?></p>
+              <p>Sexo: <?= htmlspecialchars($sexo) ?></p>
+              <p>Edad: <?= htmlspecialchars($edad) ?></p>
           </div>
 
         <div class="contenido2">
-            <p>Servicio: <?= htmlspecialchars($servicio) ?></p>
-            <p>Valor: <?= htmlspecialchars('$' . $valor) ?></p>
+            <p>Estado: <?= htmlspecialchars($estado) ?></p>
+            <p>Valor: <?= htmlspecialchars(  $total_formato) ?></p>
 
             <div class="edit-delete">
               <!-- FORMULARIO para generar factura -->
               <form id="formFactura" action="../php/generar_pdf.php" method="POST">
                 <input type="hidden" name="numero_factura" value="<?= htmlspecialchars($numero_factura) ?>">
-                <input type="hidden" name="fecha" value="<?= htmlspecialchars($fecha) ?>">
-                <input type="hidden" name="descripcion" value="<?= htmlspecialchars($descripcion) ?>">
-                <input type="hidden" name="eps" value="<?= htmlspecialchars($eps) ?>">
-                <input type="hidden" name="servicio" value="<?= htmlspecialchars($servicio) ?>">
-                <input type="hidden" name="valor" value="<?= htmlspecialchars($valor) ?>">
+                <input type="hidden" name="fecha_emision" value="<?= htmlspecialchars($fecha_emision) ?>">
+                <input type="hidden" name="servicios" value="<?= htmlspecialchars($servicios) ?>">
+                <input type="hidden" name="nombre_eps" value="<?= htmlspecialchars($nombre_eps) ?>">
+                <input type="hidden" name="estado" value="<?= htmlspecialchars($estado) ?>">
+                <input type="hidden" name="total_formato" value="<?= htmlspecialchars($total_formato) ?>">
+                <input type="hidden" name="nombre_paciente" value="<?= htmlspecialchars($nombre_paciente) ?>">
+                <input type="hidden" name="documento_identidad" value="<?= htmlspecialchars($documento_identidad) ?>">
+                <input type="hidden" name="sexo" value="<?= htmlspecialchars($sexo) ?>">
+                <input type="hidden" name="edad" value="<?= htmlspecialchars($edad) ?>">
+                
+                <div class="acciones-btn" style="display: flex;">
 
-                <button type="submit" class="btn-edit" title="Armar Factura">
+                  <button type="submit" class="btn-edit" title="Armar Factura">
                   <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                     <path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2m4 -14h6m-6 4h6m-2 4h2"/>
                   </svg>
                 </button>
+
+                <a href="../php/ordenar/reordenar.php?archivo=factura_FA50491_CAJACOPI.pdf">
+                  A
+                </a>
+
+
+
+
+                </div>
+                
               </form>
 
               <!-- MODAL -->
@@ -207,12 +299,12 @@ header("Expires: 0");
           </div>
         </div>  
           
+          </div>                
+        </main>
       </div>
-            
-
-        
-            
-    </main>
+    </div>
+  </body>
+</html>
 
 <!-- Chart library -->
 <script src="../plugins/chart.min.js"></script>
@@ -220,7 +312,9 @@ header("Expires: 0");
 <script src="../plugins/feather.min.js"></script>
 <!-- Custom scripts -->
 <script src="../js/script.js"></script>
+
 <script type="text/javascript">
+
   //MODAL DE EXITO
     const form = document.getElementById('formFactura');
 
@@ -367,6 +461,7 @@ header("Expires: 0");
   form .btn-edit{
     background-color: transparent
   }
+  
 
   form .btn-edit svg{
     padding: 0;

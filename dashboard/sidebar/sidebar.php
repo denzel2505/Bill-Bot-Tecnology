@@ -1,3 +1,15 @@
+<?php
+// Obtener el rol del usuario actual
+include("../conexion/conexion-BillBot.php");
+
+$queryRol = "SELECT rol FROM facturadores WHERE correo = ?";
+$stmtRol = $con->prepare($queryRol);
+$stmtRol->bind_param("s", $correo);
+$stmtRol->execute();
+$stmtRol->bind_result($rol_usuario);
+$stmtRol->fetch();
+$stmtRol->close();
+?>
 <aside class="sidebar">
     <div class="sidebar-start">
         <div class="sidebar-head">
@@ -35,19 +47,24 @@
                         <li>
                             <a href="../dashboard/armador2.php">Armado de cuentas</a>
                         </li>
+                        <li>
+                            <a href="../dashboard/revision-cuentas.php">Revision de cuentas</a>
+                        </li>
                     </ul>
                 </li>
                 
-              
+                <?php if($rol_usuario != 'Facturador'): ?>
                 <li>
                     <a href="../historial_acceso/historial.php">
                         <span class="icon message" aria-hidden="true"></span>
                         Comments
                     </a>
                 </li>
+                <?php endif; ?>
             </ul>
             <span class="system-menu__title">SISTEMA</span>
             <ul class="sidebar-body-menu">
+            <?php if($rol_usuario != 'Facturador'): ?>
                 <li>
                     <a class="show-cat-btn" href="##">
                         <span class="icon user-3" aria-hidden="true"></span>Gestion de perfil
@@ -63,6 +80,7 @@
             
                     </ul>
                 </li>
+                <?php endif; ?>
                 <li>
                     <a href="../video/info.php"><span class="icon setting" aria-hidden="true"></span>Configuracion</a>
                 </li>
@@ -79,7 +97,5 @@
                 <span class="sidebar-user__subtitle">Soporte tecnico</span>
             </div>
         </a>
-
-        
     </div>
 </aside>

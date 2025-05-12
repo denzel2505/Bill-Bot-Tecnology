@@ -4,25 +4,16 @@ require('../libs/fpdf.php');
 // Verifica si se envían los datos necesarios
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $numero_factura = htmlspecialchars($_POST['numero_factura']);
-    $fecha = htmlspecialchars($_POST['fecha']);
-    $descripcion = htmlspecialchars($_POST['descripcion']);
-    $eps = htmlspecialchars($_POST['eps']);
-    $servicio = htmlspecialchars($_POST['servicio']);
-    $valor = htmlspecialchars($_POST['valor']);
-    $nombre = htmlspecialchars($_POST['paciente'] ?? 'Andres Felipe ');
-    $apellido = htmlspecialchars($_POST['paciente'] ?? 'Perez Gonzalez');
-    $documento = htmlspecialchars($_POST['documento'] ?? 'CC 10023932');
-    $telefono = htmlspecialchars($_POST['telefono'] ?? '320 2123221');
-    $sexo = htmlspecialchars($_POST['sexo'] ?? 'M');
+    $fecha_emision = htmlspecialchars($_POST['fecha_emision']);
+    $nombre_paciente = htmlspecialchars($_POST['nombre_paciente']);
+    $sexo = htmlspecialchars($_POST['sexo']);
+    $edad = htmlspecialchars($_POST['edad']);
+    $servicios = htmlspecialchars($_POST['servicios']);
+    $nombre_eps = htmlspecialchars($_POST['nombre_eps']);
+    $estado = htmlspecialchars($_POST['estado']);
+    $total_formato = htmlspecialchars($_POST['total_formato']);
 
-    //DATOS PARA EPICRISIS
-    $motivo_ingreso = "Paciente ingresa con dolor abdominal agudo...";
-    $diagnostico_ingreso = "Apendicitis aguda.";
-    $evolucion_clinica = "Durante su estancia el paciente evolucionó favorablemente...";
-    $diagnostico_egreso = "Apendicitis tratada con apendicectomía.";
-    $tratamiento_recomendaciones = "Reposo por 7 días, control postquirúrgico, dieta blanda...";
-
-
+    
 
     // Crear una instancia de FPDF
     $pdf = new FPDF();
@@ -33,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pdf->Image('../img/logos/caja.png', 10, 10, 40);
     } elseif ($eps == 'MUTUALSER') {
         $pdf->Image('../img/logos/mutualser-logo.png', 10, 10, 40);
-    } elseif ($eps == 'SALUD TOTAL') {
+    } elseif ($eps == 'SALUD_TOTAL') {
         $pdf->Image('../img/logos/salud-total.png', 10, 10, 40);
     } elseif ($eps == 'NUEVA EPS') {
         $pdf->Image('../img/logos/nueva-eps.png', 10, 10, 40);
@@ -45,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pdf->SetFont('Arial', 'B', 16);
     $pdf->Cell(0, 15, 'Factura Electronica', 0, 1, 'C');
     $pdf->SetFont('Arial', '', 12);
-    $pdf->Cell(0, 8, 'EPS: ' . $eps, 0, 1, 'C');
+    $pdf->Cell(0, 8, 'EPS: ' . $nombre_eps, 0, 1, 'C');
 
     // Línea divisoria
     $pdf->Ln(5);
@@ -59,11 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $pdf->SetFont('Arial', '', 11);
     $pdf->Cell(0, 8, 'Numero de Factura: ' . $numero_factura, 0, 1);
-    $pdf->Cell(0, 8, 'Fecha: ' . $fecha, 0, 1);
-    $pdf->Cell(0, 8, 'Paciente: ' . $nombre . $apellido, 0, 1);
-    $pdf->Cell(0, 8, 'Documento: ' . $documento, 0, 1);
+    $pdf->Cell(0, 8, 'Fecha: ' . $fecha_emision, 0, 1);
+    $pdf->Cell(0, 8, 'Paciente: ' . $nombre_paciente, 0, 1);
+
     $pdf->Cell(0, 8, 'Sexo: ' . $sexo, 0, 1);
-    $pdf->Cell(0, 8, 'Telefono: ' . $telefono, 0, 1);
+    $pdf->Cell(0, 8, 'Edad: ' . $edad, 0, 1);
 
     // Descripción del servicio
     $pdf->Ln(5);
@@ -71,11 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pdf->Cell(0, 10, 'Descripcion del Servicio', 0, 1);
 
     $pdf->SetFont('Arial', '', 11);
-    $pdf->MultiCell(0, 8, $descripcion);
+    $pdf->MultiCell(0, 8, $servicios);
 
     $pdf->Ln(5);
-    $pdf->Cell(0, 8, 'Servicio: ' . $servicio, 0, 1);
-    $pdf->Cell(0, 8, 'Valor: $' . $valor, 0, 1);
+    $pdf->Cell(0, 8, 'Estado: ' . $estado, 0, 1);
+    $pdf->Cell(0, 8, 'Valor: $' . $total_formato, 0, 1);
 
     // Firma ficticia
     $pdf->Ln(20);
@@ -84,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // --------------------- PÁGINA 2 - EPICRISIS ---------------------
         // Verificar si el servicio requiere Epicrisis
-        if ($servicio == 'URGENCIAS' || $servicio == 'CIRUGIA') {
+        if ($servicios == 'URGENCIAS' || $servicios == 'CIRUGIA') {
             // Añadir página
             $pdf->AddPage();
 
@@ -368,7 +359,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 
     // Guardar el archivo PDF en el servidor
-    $nombre_archivo = 'factura_' . $numero_factura . '_' . $eps . '.pdf';
+    $nombre_archivo = 'factura_' . $numero_factura . '_' . $nombre_eps . '.pdf';
     $ruta_guardado = 'facturas/' . $nombre_archivo; // Carpeta 'facturas'
     if (!file_exists('facturas')) {
         mkdir('facturas', 0777, true); // Crea la carpeta si no existe

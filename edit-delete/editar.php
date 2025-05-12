@@ -6,7 +6,7 @@ $id=$_POST["id"];
 $rol = $_POST['rol'];
 
 
-$sql="UPDATE usuarios2 SET rol='$rol' WHERE id='$id'";
+$sql="UPDATE facturadores SET rol='$rol' WHERE id='$id'";
 $query = mysqli_query($con, $sql);
 
 if($query){

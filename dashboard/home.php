@@ -3,7 +3,7 @@ session_start();
 require '../conexion/conexion-BillBot.php'; // Conexión a la base de datos
 
 /*QUERY PARA FOTO DE PERFIL */
-$sql = "SELECT * FROM usuarios";
+$sql = "SELECT * FROM administrador";
 $query2 = mysqli_query($con, $sql);
 
 
@@ -15,7 +15,7 @@ if (!isset($_SESSION['correo'])) {
 $correo = $_SESSION['correo'];
 
 // Verificar si la sesión está activa en la base de datos
-$query = "SELECT sesion_activa FROM usuarios WHERE correo = ?";
+$query = "SELECT sesion_activa FROM administrador WHERE correo = ?";
 $stmt = $con->prepare($query);
 $stmt->bind_param("s", $correo);
 $stmt->execute();
@@ -23,12 +23,21 @@ $stmt->bind_result($sesion_activa);
 $stmt->fetch();
 $stmt->close();
 
-if ($sesion_activa == 0) {
-    session_unset();
-    session_destroy();
-    header("Location: ../ingreso.php");
-    exit;
-}
+// Obtener el rol del usuario actual
+$queryRol = "SELECT rol FROM facturadores WHERE correo = ?";
+$stmtRol = $con->prepare($queryRol);
+$stmtRol->bind_param("s", $correo);
+$stmtRol->execute();
+$stmtRol->bind_result($rol_usuario);
+$stmtRol->fetch();
+$stmtRol->close();
+
+// if ($sesion_activa == 0) {
+//     session_unset();
+//     session_destroy();
+//     header("Location: ../ingreso.php");
+//     exit;
+// }
 
 header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
@@ -56,16 +65,10 @@ header("Expires: 0");
 <a class="skip-link sr-only" href="#skip-target">Skip to content</a>
 <div class="page-flex">
   <!-- ! Sidebar -->
-  <?php
-      include("../dashboard/sidebar/sidebar.php");
-  ?>
-  
+  <?php include '../dashboard/sidebar/sidebar.php';?> <!-- Include the sidebar navigation -->
   <div class="main-wrapper">
     <!-- ! Main nav -->
-    <?php
-      include("../dashboard/navbar/navbar.php");
-    ?>
-    
+    <?php include '../dashboard/navbar/navbar.php';?> <!-- Include the main navigation -->
     <!-- ! Main -->
     <main class="main users chart-page" id="skip-target">
       <div class="container">

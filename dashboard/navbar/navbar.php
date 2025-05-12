@@ -2,7 +2,7 @@
   require '../conexion/conexion-BillBot.php'; // Conexión a la base de datos
 
   /*QUERY PARA FOTO DE PERFIL */
-$sql = "SELECT * FROM usuarios";
+$sql = "SELECT * FROM administrador WHERE correo = '". $_SESSION['correo']."'";
 $query2 = mysqli_query($con, $sql);
 ?>
 

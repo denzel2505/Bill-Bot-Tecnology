@@ -8,8 +8,8 @@
     $correo = $_POST['correo'];
 
     
-    //$sql = "INSERT INTO usuarios (url) VALUES (?)";
-    $query = "UPDATE usuarios SET nombre = '$nombre', apellido = '$apellido', usuario = '$usuario', correo = '$correo' WHERE id = 8";
+    //$sql = "INSERT INTO administrador (url) VALUES (?)";
+    $query = "UPDATE administrador SET nombre = '$nombre', apellido = '$apellido', usuario = '$usuario', correo = '$correo' WHERE id = 1";
 
     $consulta = mysqli_query($con, $query);
     if ($consulta) {

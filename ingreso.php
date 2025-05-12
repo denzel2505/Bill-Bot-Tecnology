@@ -83,7 +83,7 @@
                       <button class="btn form-control btn-dark btn-lg btn-block"  type="submit">Login</button>
                     </div>
   
-                    <center><a class="small text-muted" href="./recuperar-contraseña.php">Olvidaste tu contraseña?</a>
+                    <center><a class="small text-muted" href="./forgot_password.php">Olvidaste tu contraseña?</a>
                     <p class="mb-5 pb-lg-2" style="color: #393f81;">No tienes cuenta? <a href="registro.php" style="color: #393f81;">Registrate aquí</a></p>
                     <a href="#!" class="small text-muted">Terminos de uso.</a>
                     <a href="#!" class="small text-muted">Politica privada</a>
