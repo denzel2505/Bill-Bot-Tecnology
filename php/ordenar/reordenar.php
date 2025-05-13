@@ -1,4 +1,3 @@
-// En reordenar.php
 <?php
 if(isset($_GET['factura'])) {
     $facturaData = json_decode(urldecode($_GET['factura']), true);
@@ -21,175 +20,8 @@ if(isset($_SESSION['facturaParaReordenar'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Organizar PDF como iLovePDF</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-      text-align: center;
-      margin: 20px;
-      background-color: #f4f7f6;
-      color: #333;
-    }
-
-    h2 {
-      color: #2c3e50;
-    }
-
-    #drop-zone {
-      border: 2px dashed #007bff;
-      border-radius: 8px;
-      padding: 30px;
-      margin-bottom: 20px;
-      background-color: #ffffff;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    #drop-zone.dragover {
-      background-color: #e9ecef;
-    }
-
-    #drop-zone p {
-      margin: 0;
-      font-size: 1.1em;
-      color: #555;
-    }
-
-    #pdf-upload {
-      display: none;
-      /* Hide the default input */
-    }
-
-    #thumbnails {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      /* Increased gap */
-      justify-content: center;
-      padding: 10px;
-      margin-top: 20px;
-    }
-
-    .page-thumbnail {
-      border: 1px solid #ddd;
-      /* Softer border */
-      border-radius: 8px;
-      /* Rounded corners */
-      padding: 8px;
-      background: #ffffff;
-      cursor: grab;
-      width: 130px;
-      /* Slightly wider */
-      text-align: center;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .page-thumbnail:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    }
-
-    .page-thumbnail canvas {
-      width: 100%;
-      height: auto;
-      border-radius: 4px;
-      /* Rounded corners for canvas */
-      border: 1px solid #eee;
-    }
-
-    .page-thumbnail div {
-      /* Page number label */
-      font-size: 0.9em;
-      color: #555;
-    }
-
-    #preview {
-      margin: 30px auto;
-      padding: 15px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      background-color: #ffffff;
-      max-width: 90%;
-      /* Responsive max width */
-      width: fit-content;
-      /* Fit to content or max width */
-    }
-
-    #preview h3 {
-      margin-top: 0;
-      color: #2c3e50;
-    }
-
-    #preview canvas {
-      max-width: 100%;
-      height: auto;
-      border-radius: 4px;
-    }
-
-
-    button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 1em;
-      margin: 10px 5px;
-      cursor: pointer;
-      border-radius: 6px;
-      transition: background-color 0.3s ease, transform 0.1s ease;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    button:hover {
-      background-color: #0056b3;
-      transform: translateY(-1px);
-    }
-
-    button:active {
-      transform: translateY(0px);
-    }
-
-    button:disabled {
-      background-color: #cccccc;
-      cursor: not-allowed;
-    }
-
-
-    .spinner {
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid #007bff;
-      /* Match button color */
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-      margin: 20px auto;
-      /* Added top/bottom margin */
-    }
-
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    .hidden {
-      display: none;
-    }
-
-    .status-message {
-      margin-top: 10px;
-      font-style: italic;
-      color: #555;
-    }
-  </style>
+  <link rel="stylesheet" href="../css/style.min.css">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
@@ -208,19 +40,29 @@ if(isset($_SESSION['facturaParaReordenar'])) {
   <div id="controls" class="hidden">
     <button onclick="console.log('Botón clickeado')" id="assign-order-btn" onclick="assignOrder()">Reordenar y Previsualizar</button>
     <div id="preview"></div>
-    <button id="download-btn" onclick="downloadReorderedPDF()" disabled>Descargar PDF Reordenado</button>
+    <button id="download-btn"  disabled>Descargar PDF Reordenado</button>
   </div>
 
 
   <div id="loading-message" class="status-message hidden">Cargando PDF...</div>
 
   <!-- En tu vista de reordenación -->
-  <div id="reordenar-zone">
-      <h3>Arrastra facturas aquí para reordenar</h3>
-      <div id="lista-reordenar"></div>
-  </div>
+   <div id="error-msg">
+        <h1  style="color: crimson; text-align: center; display: auto;">
+  ⚠️ Debes cargar una factura para reordenarla.
+        </h1>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+      <a href="../../dashboard/armador2.php">Regresar</a>
+   </div>
+    
+    
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js">
+    document.getElementById('error-msg').style.display = 'block';
+
+  </script>
   <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
@@ -307,7 +149,10 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     });
 
+    let archivoCargadoNombre = '';
+
     async function handleFile(file) {
+      archivoCargadoNombre = file.name;
       if (!file) return;
 
       if (file.type !== "application/pdf") {
@@ -326,7 +171,7 @@ window.addEventListener("DOMContentLoaded", () => {
       const fileReader = new FileReader();
       
 
-      
+      document.getElementById('error-msg').style.display = 'none';
 
 
 
@@ -349,7 +194,7 @@ window.addEventListener("DOMContentLoaded", () => {
             return;
           }
 
-          for (let i = 0; i < pdf.numPages; i++) {
+     for (let i = 0; i < pdf.numPages; i++) {
             const page = await pdf.getPage(i + 1); // las páginas en pdf.js son 1-indexed
             
 
@@ -683,43 +528,52 @@ window.addEventListener("DOMContentLoaded", () => {
         previewContainer.innerHTML = `<p class="status-message" style="color:red;">Error al generar vista previa. ${error.message}</p>`;
         reorderedPdfBytes = null; // Invalidar bytes si hubo error
       }
+
+
+
+      downloadBtn.disabled = false;
     }
 
+    
+    
+    
+    
+    
     window.downloadReorderedPDF = async function downloadReorderedPDF() {
-      if (!reorderedPdfBytes) {
-        alert("Primero genera el PDF reordenado haciendo clic en 'Reordenar y Previsualizar'.");
-        return;
-      }
-      if (reorderedPdfBytes.length === 0) {
-        alert("No hay datos de PDF para descargar. Intenta reordenar de nuevo.");
-        return;
-      }
+  if (!reorderedPdfBytes) {
+    alert("Primero debes reordenar el PDF.");
+    return;
+  }
 
-      try {
-        // Crear un objeto Blob a partir de los bytes del PDF (Uint8Array)
-        const blob = new Blob([reorderedPdfBytes], { type: 'application/pdf' });
+  const archivoNombre = archivoCargadoNombre || "PDF_reordenado.pdf";
+  const blob = new Blob([reorderedPdfBytes], { type: "application/pdf" });
 
-        // Usar FileSaver.js para iniciar la descarga
-        saveAs(blob, 'PDF_reordenado.pdf');
-      } catch (error) {
-        console.error("Error al crear o guardar el Blob para la descarga:", error);
-        alert("Ocurrió un error al preparar el PDF para la descarga. Por favor, revisa la consola.");
-      }
+  // 1️⃣ Descargar al navegador
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = archivoNombre;
+  a.click();
+  URL.revokeObjectURL(a.href);
 
+  // 2️⃣ Guardar en el servidor
+  const formData = new FormData();
+  formData.append("archivo", blob, archivoNombre);
+  formData.append("nombre", archivoNombre);
 
-
-      console.log("Botones:", {
-      assignBtn: document.getElementById('assign-order-btn'),
-      downloadBtn: document.getElementById('download-btn'),
-      thumbnails: document.getElementById('thumbnails')
+  try {
+    const response = await fetch("guardar_pdf.php", {
+      method: "POST",
+      body: formData
     });
 
-    console.log("Funciones:", {
-      assignOrder: typeof assignOrder,
-      downloadReorderedPDF: typeof downloadReorderedPDF
-    });
+    const resultado = await response.text();
+    console.log("Servidor respondió:", resultado);
+  } catch (err) {
+    console.error("Error al guardar en el servidor:", err);
+  }
+}
 
-    }
+
 
 
 
@@ -728,3 +582,176 @@ window.addEventListener("DOMContentLoaded", () => {
 </body>
 
 </html>
+
+
+
+
+<style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      text-align: center;
+      margin: 20px;
+      background-color: #f4f7f6;
+      color: #333;
+    }
+
+    h2 {
+      color: #2c3e50;
+    }
+
+    #drop-zone {
+      border: 2px dashed #007bff;
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 20px;
+      background-color: #ffffff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #drop-zone.dragover {
+      background-color: #e9ecef;
+    }
+
+    #drop-zone p {
+      margin: 0;
+      font-size: 1.1em;
+      color: #555;
+    }
+
+    #pdf-upload {
+      display: none;
+      /* Hide the default input */
+    }
+
+    #thumbnails {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      /* Increased gap */
+      justify-content: center;
+      padding: 10px;
+      margin-top: 20px;
+    }
+
+    .page-thumbnail {
+      border: 1px solid #ddd;
+      /* Softer border */
+      border-radius: 8px;
+      /* Rounded corners */
+      padding: 8px;
+      background: #ffffff;
+      cursor: grab;
+      width: 130px;
+      /* Slightly wider */
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .page-thumbnail:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .page-thumbnail canvas {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      /* Rounded corners for canvas */
+      border: 1px solid #eee;
+    }
+
+    .page-thumbnail div {
+      /* Page number label */
+      font-size: 0.9em;
+      color: #555;
+    }
+
+    #preview {
+      margin: 30px auto;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #ffffff;
+      max-width: 90%;
+      /* Responsive max width */
+      width: fit-content;
+      /* Fit to content or max width */
+    }
+
+    #preview h3 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+
+    #preview canvas {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 1em;
+      margin: 10px 5px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background-color 0.3s ease, transform 0.1s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover {
+      background-color: #0056b3;
+      transform: translateY(-1px);
+    }
+
+    button:active {
+      transform: translateY(0px);
+    }
+
+    button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+
+
+    .spinner {
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #007bff;
+      /* Match button color */
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+      /* Added top/bottom margin */
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .status-message {
+      margin-top: 10px;
+      font-style: italic;
+      color: #555;
+    }
+  </style>

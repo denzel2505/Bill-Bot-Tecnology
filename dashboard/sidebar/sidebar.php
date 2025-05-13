@@ -57,7 +57,7 @@ $stmtRol->close();
                 <li>
                     <a href="../historial_acceso/historial.php">
                         <span class="icon message" aria-hidden="true"></span>
-                        Comments
+                        Historial de acceso
                     </a>
                 </li>
                 <?php endif; ?>

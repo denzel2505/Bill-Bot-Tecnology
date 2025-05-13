@@ -67,7 +67,10 @@ header("Expires: 0");
   <link rel="stylesheet" href="../css/style.css">
 </head>
 
+
 <body>
+  
+
   <div class="layer"></div>
 <!-- ! Body -->
 <a class="skip-link sr-only" href="#skip-target">Skip to content</a>
@@ -161,6 +164,7 @@ header("Expires: 0");
     }
 
             ?>
+            
 
           <div class="contenido1">
               <p>Número de Factura: <?= htmlspecialchars($numero_factura) ?></p>
@@ -170,6 +174,9 @@ header("Expires: 0");
               <p>Nombre Paciente: <?= htmlspecialchars($nombre_paciente) ?></p>
               <p>Sexo: <?= htmlspecialchars($sexo) ?></p>
               <p>Edad: <?= htmlspecialchars($edad) ?></p>
+              
+
+
           </div>
 
         <div class="contenido2">
@@ -190,7 +197,8 @@ header("Expires: 0");
                 <input type="hidden" name="sexo" value="<?= htmlspecialchars($sexo) ?>">
                 <input type="hidden" name="edad" value="<?= htmlspecialchars($edad) ?>">
                 
-                <div class="acciones-btn" style="display: flex;">
+                
+                <div class="acciones-btn" >
 
                   <button type="submit" class="btn-edit" title="Armar Factura">
                   <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler">
@@ -199,17 +207,18 @@ header("Expires: 0");
                   </svg>
                 </button>
 
-                <a href="../php/ordenar/reordenar.php?archivo=factura_FA50491_CAJACOPI.pdf">
-                  A
+                <!--<a href="../php/ordenar/reordenar.php?archivo=factura_FA50491_CAJACOPI.pdf">
+                  
+                </a>-->
+
+                <a href="../php/ordenar/reordenar.php?archivo=factura_<?php echo $numero_factura . '_' . strtoupper(str_replace(' ', '', $nombre_eps)); ?>.pdf">
+                  <svg  xmlns="http://www.w3.org/2000/svg"  width="34"  height="34"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg> 
                 </a>
-
-
-
-
+                  
                 </div>
-                
               </form>
 
+              
               <!-- MODAL -->
                 <div id="modalFactura" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:999;">
                   <div class="modal-content" style="position:absolute; top: 20%; right: 50%; transform: translate(50%,-50%);  background:#fff; margin:15% auto; padding:20px; width:300px; border-radius:10px; text-align:center;">
@@ -220,6 +229,14 @@ header("Expires: 0");
                   </div>
                 </div>
               </div>
+                  <!-- SUGERENCIA -->
+                  <div class="tooltip-container">
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="#ebb944"  class="icon icon-tabler icons-tabler-filled icon-tabler-alert-triangle"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 1.67c.955 0 1.845 .467 2.39 1.247l.105 .16l8.114 13.548a2.914 2.914 0 0 1 -2.307 4.363l-.195 .008h-16.225a2.914 2.914 0 0 1 -2.582 -4.2l.099 -.185l8.11 -13.538a2.914 2.914 0 0 1 2.491 -1.403zm.01 13.33l-.127 .007a1 1 0 0 0 0 1.986l.117 .007l.127 -.007a1 1 0 0 0 0 -1.986l-.117 -.007zm-.01 -7a1 1 0 0 0 -.993 .883l-.007 .117v4l.007 .117a1 1 0 0 0 1.986 0l.007 -.117v-4l-.007 -.117a1 1 0 0 0 -.993 -.883z" /></svg>
+                    <div class="tooltip-left">
+                      Para editar una factura, primero debes armarla en el icono de factura.
+                    </div>
+                  </div>
+
             </div>
             <?php else: ?>
                 <p>No se enviaron datos.</p>
@@ -438,8 +455,66 @@ header("Expires: 0");
 
 
 
+/*********************************SUGERENCIA ARMADO************************* */
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+  display: flex;
+  margin-left: auto;
+}
+
+.tooltip-left {
+  position: absolute;
+  left: auto;
+  right: calc(100% + 10px); /* Espacio entre ícono y tooltip */
+  top: 50%;
+  transform: translateY(-50%);
+  background-color:rgb(42, 97, 248);
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  width: max-content;
+  max-width: 220px;
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.tooltip-container:hover .tooltip-left {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tooltip-left::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent rgb(42, 97, 248);
+}
+
+.darkmode .tooltip-left {
+    background-color:rgb(39, 39, 49);
+  }
 
 
+.darkmode .tooltip-left::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent transparent rgb(39, 39, 49);
+}
 
 
 
@@ -451,6 +526,8 @@ header("Expires: 0");
   .edit-delete{
     width: 0;
     padding: 0;
+    justify-content: end;
+    flex-direction: row;
   }
 
   form{
@@ -472,8 +549,27 @@ header("Expires: 0");
   .contenido1 p{
     margin: 15px 0;
   }
+  
+  .contenido2 p{
+    text-align: end;
+  }
 
-
+  .edit-delete{
+    display: flex;
+    width: 30%;
+  }
+  .acciones-btn{
+    justify-content: flex-start;
+    display: flex;
+    background-color: red;
+  }
+  .formFactura{
+    width: 100%;
+    justify-content: flex-start;
+    background-color: yellow;
+    padding: 30px;
+  }
+  
 
 
 
