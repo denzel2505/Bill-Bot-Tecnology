@@ -1,0 +1,388 @@
+/*Fuentes*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Signika+Negative:wght@300..700&display=swap');
+
+:root{
+    --azul-1:#0042f7;
+    --azul-2:#0b297c;
+    --azul-dark:#0c1f46;
+}
+
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    font-family: "Signika Negative", sans-serif;
+    list-style: none;
+}
+
+html{
+    width: 100%;
+    height: 100%;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+
+/*Barra menú*/
+.fondo nav{
+    padding: 25px;
+    height: 100%;
+    justify-content: space-between;
+    
+}
+
+
+.logo-bot{
+    display: flex;
+    align-items: center;
+}
+
+.fondo nav svg{
+    margin-left: 30px;
+}
+
+
+.fondo nav,ul{
+    display: flex;
+    color: #000;
+}
+
+.fondo nav ul li{
+    margin: auto;
+}
+
+.fondo nav ul li a{
+    color: #fff;
+    margin: 40px;
+    text-wrap: nowrap;
+    font-size: 1.3rem;
+}
+
+.fondo nav ul li a:hover{
+    color:var(--azul-1);
+    transition: all 200ms ease;
+}
+
+
+/*fondo*/
+
+.fondo{
+    background: linear-gradient(var(--azul-dark),var(--azul-2));
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-bottom: 15%;
+    flex-wrap: nowrap;
+}
+
+.fondo p{
+    text-align: center;
+    font-size: 2.8rem;
+    color: #fff;
+    padding-top: 60px;
+    text-shadow: 3px 6px 3px #000;
+}
+
+
+/*Info y formulario*/
+.infoBill-Bot{
+    margin-top: 7%;
+    display: flex;
+    justify-content: space-around;
+}
+
+/*ANIMACION*/
+.infoBill-Bot .info-2 img{
+    width: 500px;
+    object-fit: fill;
+}
+
+
+
+.infoBill-Bot .info-2 .info-2-logos img{
+    width: 70px;
+    height: 70px;
+    object-fit:contain;
+   position:absolute;
+    top: 0;
+    background-color: #ffffffa4;
+    border: 3px solid var(--azul-1) ;
+    border-radius: 100%;
+    padding: 15px 5px;
+    margin-top: -300px;
+    /* Primero se establece un borde transparente */
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.5);
+}
+
+
+.infoBill-Bot .info-2-logos{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 0 15%;
+    animation: subir 2s infinite alternate ease-in-out;
+}
+
+.info-2-logos .caja2{
+    right: 0;
+    animation: subir1 1.8s infinite alternate ease-in-out;
+}
+
+.info-2-logos .caja3{
+    bottom: 0;
+    animation: subir2 1.8s infinite alternate ease-in-out;
+}
+
+@keyframes subir{
+    0%{
+        transform: translateY(0);
+    }
+    100%{
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes subir1 {
+    0%{
+        transform: translateY(0);
+    }
+    100%{
+        transform: translateY(-18px);
+    }
+}
+
+@keyframes subir2 {
+    0%{
+        transform: translateY(0);
+    }
+    100%{
+        transform: translateY(-19px);
+    }
+}
+
+.infoBill-Bot h1{
+    color: #fff;
+    font-size: 5.5rem;
+    margin: 5% 0 0 15%;
+}
+
+.infoBill-Bot p{
+    font-size: 1rem;
+    width: 400px;
+    text-align: justify;
+    margin: 20px 0 20px 15%;
+    padding: 0;
+}
+
+.infoBill-Bot .boton{
+    text-align: center;
+    font-size: 18px;
+    margin: 45px 0 0 15%;
+    background-color: var(--azul-1);
+    color: #fff;
+    border-radius: 30px;
+    padding: 15px;
+    width: 295px;
+    display: inline;
+}
+
+.infoBill-Bot .boton a{
+    color: #fff;
+    transition: all 200ms ease-in-out;
+}
+
+.infoBill-Bot .boton a:hover{
+    padding-left: 2px;
+    padding-right: 5px;
+    cursor: pointer;
+}
+
+
+.infoBill-Bot svg{
+    position: relative;
+    top: 14px;
+}
+
+
+/*Flecha*/
+.flecha{
+    position: fixed;
+    right: 12px;
+    bottom: 60px;
+}
+
+/*Contenido*/
+#contenido{
+    display: flex;
+    background: linear-gradient(var(--azul-2),var(--azul-dark));
+    padding: 80px 20px;
+    width: 100%;
+    text-justify: justify;
+    justify-content: space-evenly;
+}
+
+#contenido h1,h2,h3{
+    font-size: 1.8rem;
+    margin: 0;
+    color: #fff;
+    background-color:#0e2ea1;
+    text-align: center;
+    padding: 35px 10px;
+    border-radius: 10px 10px 0 0 ;
+}
+
+#contenido div{
+    margin: 20px 40px;
+}
+
+#contenido p{
+    max-width: 100%;
+    color: #fff;
+    background-color: #0f2268;
+    text-align: justify;
+    padding: 35px 30px;
+    border-radius: 0 0 10px 10px;
+}
+
+/*Equipo*/
+.equipo{
+    background: linear-gradient(var(--azul-dark),var(--azul-2));
+    padding: 20px;
+}
+
+.miembros{
+    display: flex;
+    justify-content:space-evenly;
+    padding: 0 0 50px 0;
+}
+
+.equipo img{
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    box-shadow: 1px 2px 5px 0.1px #000000ab;
+}
+
+
+.equipo .rol{
+    text-align: start;
+    margin-top: 10px;
+    color: #8da7ee;
+}
+
+.equipo .nombre{
+    font-size: 1.4rem;
+    margin-top: 10px;
+    
+    color: #fff;
+}
+
+.titulo-equipo{
+    display: n;
+}
+
+h4{
+    text-align: center;
+    font-size: 2.5rem;
+    color: #fff;
+    margin: 95px 0;   
+}
+
+.equipo div{
+    cursor:pointer;
+}
+
+/*Mapa*/
+.mapa{
+    overflow: hidden;
+    width: 100%;
+
+}
+
+/*Card*/
+.container {
+    margin: 75px auto;
+    padding: 20px;
+    text-align: center;
+}
+.container h1 {
+    font-size: 2.3rem;
+    margin-bottom: 35px;
+    text-align: center;
+}
+.pricing-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px 80px;
+    text-align: center;
+}
+.plan {
+    background: rgb(228, 228, 228);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    transition: box-shadow 0.3s ease-in-out;
+    margin: 0 30px;
+    max-width: 305px;
+    display: flex;
+    flex-direction: column;
+}
+
+.plan p{
+    margin-bottom: 12px;
+}
+
+.plan:hover {
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+.highlight {
+    background: rgb(228, 228, 228);
+    box-shadow: none;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    max-width: 305px;
+}
+.price {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.btn {
+    padding: 10px 15px;
+    background: #0042f7;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: auto;
+}
+
+.btn:hover {
+    background: #0031b5;
+}
+
+
+
+
+/*Footer*/
+footer{
+    text-align: center;
+    background: linear-gradient(var(--azul-2),var(--azul-dark));
+    padding: 5px;
+    color: #fff;
+}
+
+footer p{
+    margin: 10px;
+}
+
+footer svg{
+    margin: 10px 20px;
+    cursor: pointer;
+}
+
+/*SCROLL*/
+
+
